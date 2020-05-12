@@ -61,7 +61,7 @@ session_start();
         include 'modalNewMsg.html';
         ?>
 
-        <div class="mt-5 mb-5 d-flex justify-content-between">
+        <div id="c1" class="mt-5 mb-5 d-flex justify-content-between">
             <div>
                 Bienvenue <span id="pseudo" class="big-text"><?= $_SESSION['pseudo'] ?></span> !
                 <?php
