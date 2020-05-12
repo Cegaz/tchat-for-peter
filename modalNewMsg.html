@@ -14,22 +14,7 @@
                 <div class="modal-footer">
                     <input hidden id="parent-msg">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <script type="text/javascript">
-                        function confirmation(){
-                            var elem = document.getElementById("c1");
-                            var newDiv = document.createElement('div');
-                            newDiv.classList.add('alert','alert-dark');
-                            //newDiv.setAttribute(role,"alert");
-                            newDiv.innerHTML="<h4 class='alert-heading'>Message envoyé !</h4><p>Votre message sera visible une fois validé par votre professeur.</p>";
-                            newDiv.style.top = '0px';
-                            newDiv.style.position = 'absolute';
-                            elem.appendChild(newDiv);
-                            setTimeout(() => {  newDiv.remove(); }, 5000);
-                            $('#modalNewMsg').modal('hide')
-                        }
-
-                    </script>
-                    <input type="submit" id="submitInsert" name="submit" value="Poster" onclick="confirmation();" class="btn btn-success">
+                    <input type="submit" id="submitInsert" name="submit" value="Poster" data-dismiss="modal" class="btn btn-success">
                 </div>
             </form>
         </div>
