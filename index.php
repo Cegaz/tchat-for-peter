@@ -59,6 +59,7 @@ session_start();
         include 'connect.php';
         include 'functions.php';
         include 'modalNewMsg.html';
+        include 'data.php';
         ?>
 
         <div class="alert alert-dark fade" role="alert" id="alert">
@@ -90,7 +91,7 @@ session_start();
         <div id="messages">
             <?php
 
-            $messages = getMessages($bdd, 'VALIDE');
+            $messages = getMessages($bdd, 'VALIDE', $class);
 
             foreach ($messages as $message) {
                 echo getMessageDisplay($message);

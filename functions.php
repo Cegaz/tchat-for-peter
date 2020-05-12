@@ -42,10 +42,10 @@ function isAdmin()
 function getQueryLoadMsg($bdd)
 {
     return $bdd->prepare('
-        SELECT m.id, m.pseudo, m.message,
+        SELECT m.id, m.pseudo, m.message, m.class,
         DATE_FORMAT(m.creationDate, "%e/%m %H:%i") as dateFormatted, m.status, m.replyTo
         FROM messages m
-        WHERE m.status = :status AND m.replyTo IS NULL
+        WHERE m.status = :status AND m.class = :class AND m.replyTo IS NULL
         ORDER BY m.creationDate
         DESC LIMIT 0,10');
 }
@@ -72,10 +72,13 @@ function getRepliesByMsg($bdd, $msgId)
     return $results;
 }
 
-function getMessages($bdd, $status)
+function getMessages($bdd, $status, $class)
 {
     $query = getQueryLoadMsg($bdd);
-    $query->execute(['status' =>  $status]);
+    $query->execute([
+        'status' =>  $status,
+        'class' => $class
+    ]);
 
     $messages = [];
     while($data = $query->fetch(PDO::FETCH_ASSOC)){

@@ -1,6 +1,7 @@
 <?php
 include 'connect.php';
 include 'functions.php';
+include 'data.php';
 
 if (!empty($_POST['message'])){
 
@@ -8,9 +9,9 @@ if (!empty($_POST['message'])){
 
     $isAReply = isset($_POST['parentMsgId']) && !empty($_POST['parentMsgId']);
 
-    $insertion = $bdd->prepare('INSERT INTO messages(pseudo, message, creationDate, status' .
+    $insertion = $bdd->prepare('INSERT INTO messages(pseudo, message, creationDate, status, class' .
         ($isAReply ? ', replyTo' : '') .
-        ') VALUES(:pseudo, :message, NOW(), :status' .
+        ') VALUES(:pseudo, :message, NOW(), :status, :class' .
         ($isAReply ? ', :parentMsgId' : '') . ')');
 
     $isAdmin = isAdmin();
@@ -19,7 +20,8 @@ if (!empty($_POST['message'])){
     $params = [
         'pseudo' => $_POST['pseudo'] ?? 'anonyme',
         'message' => $_POST['message'],
-        'status' => $status
+        'status' => $status,
+        'class' => $class
     ];
     if ($isAReply) {
         $params['parentMsgId'] = (int)$_POST['parentMsgId'];
